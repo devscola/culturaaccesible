@@ -20,8 +20,9 @@ install:
 
 script:
   - docker-compose run system /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; bundle install; bundle exec rake prepare; bundle exec rake test"
-  - sleep 2
-  - /bin/sh -c "cd /opt/app/culturaaccesible-app; bundle install; rspec"  
+  - sleep 1
+  - /bin/sh -c "ls; cd /opt/app/culturaaccesible-app; bundle install; rspec"
+  - sleep 1
 
 after_script:
   - docker-compose down
