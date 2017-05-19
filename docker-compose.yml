@@ -25,7 +25,7 @@ services:
      - ./culturaaccesible-system:/opt/app/culturaaccesible-system
      - bundle:/usr/local/bundle
     links:
-      - mongocontainer
+      - mongo-cuac
       - selenium
     command: bash -c "bundle install --jobs 3 && bundle exec rake prepare && bundle exec rake"
 
@@ -37,7 +37,7 @@ services:
     logging:
       driver: none
 
-  mongocontainer:
+  mongo-cuac:
     image: mongo:latest
     ports:
         - "27017:27017"
