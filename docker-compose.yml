@@ -12,7 +12,7 @@ services:
       - .:/opt/app
     links:
       - system
-    command: bash -c "/bin/bash prepare_project.sh"
+    command: bash -c "/bin/bash use_project.sh"
 
   system:
     container_name: system

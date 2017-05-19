@@ -6,5 +6,6 @@ fi
 if [ -d "culturaaccesible-app" ]; then
   cd culturaaccesible-app
   npm install
+  bundle install
   ionic serve --all
 fi

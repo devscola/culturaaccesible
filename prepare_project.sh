@@ -6,4 +6,5 @@ fi
 
 if [ ! -d "culturaaccesible-app" ]; then
   git clone https://github.com/devscola/culturaaccesible-app.git
+  
 fi
