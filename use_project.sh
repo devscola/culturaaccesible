@@ -4,6 +4,7 @@ if [ -d "culturaaccesible-system" ]; then
 fi
 
 if [ -d "culturaaccesible-app" ]; then
+  bundle install
   cd culturaaccesible-app
   npm install -f
   bundle install
