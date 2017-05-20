@@ -1,6 +1,6 @@
 version: '2'
 services:
-  cuac-app:
+  app:
     container_name: app-cuac-container
     build:
       context: culturaaccesible-app
@@ -11,11 +11,11 @@ services:
     volumes:
       - .:/opt/app
     links:
-      - cuac-mongo
-      - cuac-selenium
+      - selenium
+      - mongo
     command: bash -c "/bin/bash use_project.sh"
 
-  cuac-system:
+  system:
     container_name: system-cuac-container
     build: 
       context: culturaaccesible-system
@@ -26,11 +26,11 @@ services:
      - ./culturaaccesible-system:/opt/app/culturaaccesible-system
      - bundle:/usr/local/bundle
     links:
-      - cuac-mongo
-      - cuac-selenium
+      - mongo
+      - selenium
     command: bash -c "bundle install --jobs 3 && bundle exec rake prepare && bundle exec rake"
 
-  cuac-selenium:
+  selenium:
     container_name: chrome-cuac-container
     image: selenium/standalone-chrome
     ports:
@@ -38,7 +38,7 @@ services:
     logging:
       driver: none
 
-  cuac-mongo:
+  mongo:
     container_name: mongo-cuac-container
     image: mongo:latest
     ports:
