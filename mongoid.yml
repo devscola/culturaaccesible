@@ -1,7 +1,7 @@
 development:
   clients:
     default:
-      database: culturaaccesible_db
+      database: cuac_db
       hosts:
         - localhost:27017
         
