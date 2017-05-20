@@ -1,10 +1,10 @@
 {
   "name": "culturaaccesible",
-  "version": "",
-  "author": "",
+  "version": "0.1",
+  "author": "DevScola",
   "homepage": "",
-  "private": true,
-  "scripts": {},
+  "private": "",
+  "scripts": {  },
   "dependencies": {},
   "devDependencies": {},
   "description": ""

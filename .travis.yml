@@ -19,10 +19,9 @@ install:
   - sleep 5
 
 script:
-  - docker-compose run system /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; bundle install; bundle exec rake prepare; bundle exec rake test"
+  - docker-compose run cuac-system /bin/sh -c "/bin/bash run_tests_system.sh"
   - sleep 1
-  - /bin/sh -c "cd ./culturaaccesible-app; bundle install"
-  - /bin/sh -c "cd ./culturaaccesible-app; rspec"
+  - docker-compose run cuac-app /bin/sh -c "/bin/bash run_tests_app.sh"
   - sleep 1
 
 after_script:
