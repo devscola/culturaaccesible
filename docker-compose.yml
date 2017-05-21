@@ -28,7 +28,7 @@ services:
     links:
       - mongo
       - selenium
-    command: bash -c "bundle install --jobs 3 && bundle exec rake prepare && bundle exec rake"
+    command: bash -c "sh bundler_and_download_vendor.sh"
 
   selenium:
     container_name: chrome-cuac-container
