@@ -10,6 +10,7 @@ services:
       - "35729:35729"
     volumes:
       - .:/opt/app
+      - bundle:/usr/local/bundle
     links:
       - selenium
       - mongo
@@ -23,8 +24,8 @@ services:
     ports:
       - "4567:4567"
     volumes:
-     - ./culturaaccesible-system:/opt/app/culturaaccesible-system
-     - bundle:/usr/local/bundle
+      - ./culturaaccesible-system:/opt/app/culturaaccesible-system
+      - bundle:/usr/local/bundle
     links:
       - mongo
       - selenium
