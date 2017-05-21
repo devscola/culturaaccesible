@@ -19,3 +19,14 @@ echo
 fi
 
 echo "Clonning is update. You must run 'docker-compose up --build' and tests."
+
+if [ ! -d "culturaaccesible-system/public/vendor/classjs" ]; then
+  mkdir -p culturaaccesible-system/public/vendor/classjs
+fi
+
+if [ ! -d "culturaaccesible-system/public/vendor/polymer" ]; then
+  mkdir -p culturaaccesible-system/public/vendor/polymer
+fi
+
+echo "The system is already"
+
