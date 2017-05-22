@@ -28,6 +28,9 @@ plugins/android.json
 plugins/ios.json
 www/
 
+.bundle
+.chromedriver-helper
+.v8flags.*
 culturaaccesible-app
 culturaaccesible-system
 managedocker.sh

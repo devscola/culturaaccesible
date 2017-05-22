@@ -19,17 +19,17 @@ install:
   - sleep 5
 
 script:
-  - docker-compose run system /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; bundle install; bundle exec rake prepare; bundle exec rake test"
+  - docker-compose run system /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; bundle install; bundle exec rake prepare; bundle exec rake"
   - sleep 1
-  - /bin/sh -c "ls; cd /opt/app/culturaaccesible-app; bundle install; rspec"
+  - docker-compose run app /bin/sh -c "cd /opt/app/culturaaccesible-app; bundle install; bundle exec rspec"
   - sleep 1
 
 after_script:
   - docker-compose down
 
-#notifications:
-#  slack:
-#    template:
-#      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository}@%{branch} by %{author} %{result} in %{duration}"
-#    rooms:
-#      - devscola:l7PXPT2ycwSwtbwNI8Bd1hEb#fc_travis
+notifications:
+  slack:
+    template:
+      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository}@%{branch} by %{author} %{result} in %{duration}"
+    rooms:
+      - devscola:l7PXPT2ycwSwtbwNI8Bd1hEb#fc_travis

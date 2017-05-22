@@ -1,7 +1,7 @@
 version: '2'
 services:
   app:
-    container_name: app-cuac
+    container_name: app-cuac-container
     build:
       context: culturaaccesible-app
       dockerfile: Dockerfile
@@ -10,34 +10,37 @@ services:
       - "35729:35729"
     volumes:
       - .:/opt/app
+      - bundle:/usr/local/bundle
     links:
-      - system
+      - selenium
+      - mongo
     command: bash -c "/bin/bash use_project.sh"
 
   system:
-    container_name: system
+    container_name: system-cuac-container
     build: 
       context: culturaaccesible-system
       dockerfile: Dockerfile
     ports:
       - "4567:4567"
     volumes:
-     - ./culturaaccesible-system:/opt/app/culturaaccesible-system
-     - bundle:/usr/local/bundle
+      - ./culturaaccesible-system:/opt/app/culturaaccesible-system
+      - bundle:/usr/local/bundle
     links:
-      - mongocontainer
+      - mongo
       - selenium
-    command: bash -c "bundle install --jobs 3 && bundle exec rake prepare && bundle exec rake"
+    command: bash -c "sh bundler_and_download_vendor.sh"
 
   selenium:
-    container_name: selenium-cuac
+    container_name: chrome-cuac-container
     image: selenium/standalone-chrome
     ports:
         - "4444:4444"
     logging:
       driver: none
 
-  mongocontainer:
+  mongo:
+    container_name: mongo-cuac-container
     image: mongo:latest
     ports:
         - "27017:27017"
