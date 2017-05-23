@@ -31,7 +31,7 @@ services:
     links:
       - mongo
       - selenium
-    command: bash -c "sh ensure_vendorization.sh"
+    command: bash -c "sh bundler_and_download_vendor.sh"
 
   app:
     container_name: app-cuac-container
