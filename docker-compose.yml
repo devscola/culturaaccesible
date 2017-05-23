@@ -1,10 +1,8 @@
 version: '2'
 services:
-  app:
-    container_name: app-cuac-container
-    build:
-      context: culturaaccesible-app
-      dockerfile: Dockerfile
+  ionic:
+    container_name: ionic-cuac-container
+    image: devscola/culturaaccesible-ionic:latest
     ports:
       - "8100:8100"
       - "35729:35729"
@@ -16,11 +14,9 @@ services:
       - mongo
     command: bash -c "/bin/bash use_project.sh"
 
-  system:
-    container_name: system-cuac-container
-    build: 
-      context: culturaaccesible-system
-      dockerfile: Dockerfile
+  sinatra:
+    container_name: sinatra-cuac-container
+    image: devscola/culturaaccesible-sinatra:latest
     ports:
       - "4567:4567"
     volumes:
@@ -30,6 +26,32 @@ services:
       - mongo
       - selenium
     command: bash -c "sh bundler_and_download_vendor.sh"
+
+  app:
+    container_name: app-cuac-container
+    build:
+      context: culturaaccesible-app
+      dockerfile: Dockerfile
+    volumes:
+      - ./culturaaccesible-app:/opt/app/culturaaccesible-app
+      - bundle:/usr/local/bundle
+    links:
+      - ionic
+      - selenium
+      - mongo
+
+  system:
+    container_name: system-cuac-container
+    build: 
+      context: culturaaccesible-system
+      dockerfile: Dockerfile.system
+    volumes:
+      - ./culturaaccesible-system:/opt/app/culturaaccesible-system
+      - bundle:/usr/local/bundle
+    links:
+      - sinatra
+      - mongo
+      - selenium
 
   selenium:
     container_name: chrome-cuac-container
