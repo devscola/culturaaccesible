@@ -14,7 +14,7 @@ before_install:
 
 install:
   - /bin/sh -c "/bin/bash prepare_project.sh"
-  - docker-compose build
+  - docker-compose -f docker-compose.travis.yml build
   - docker-compose up -d
   - sleep 5
 

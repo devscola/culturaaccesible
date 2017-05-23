@@ -1,8 +1,7 @@
 version: '2'
 services:
-  ionic:
-    container_name: ionic-cuac-container
-    image: devscola/culturaaccesible-ionic:latest
+  app:
+    container_name: app-cuac-container
     build:
       context: .
       dockerfile: Dockerfile.ionic
@@ -13,13 +12,12 @@ services:
       - .:/opt/app
       - bundle:/usr/local/bundle
     links:
-      - selenium
       - mongo
+      - selenium
     command: bash -c "/bin/bash use_project.sh"
 
-  sinatra:
+  system:
     container_name: sinatra-cuac-container
-    image: devscola/culturaaccesible-sinatra:latest
     build: 
       context: culturaaccesible-system
       dockerfile: Dockerfile
@@ -31,33 +29,7 @@ services:
     links:
       - mongo
       - selenium
-    command: bash -c "sh bundler_and_download_vendor.sh"
-
-  app:
-    container_name: app-cuac-container
-    build:
-      context: culturaaccesible-app
-      dockerfile: Dockerfile
-    volumes:
-      - ./culturaaccesible-app:/opt/app/culturaaccesible-app
-      - bundle:/usr/local/bundle
-    links:
-      - ionic
-      - selenium
-      - mongo
-
-  system:
-    container_name: system-cuac-container
-    build: 
-      context: culturaaccesible-system
-      dockerfile: Dockerfile.system
-    volumes:
-      - ./culturaaccesible-system:/opt/app/culturaaccesible-system
-      - bundle:/usr/local/bundle
-    links:
-      - sinatra
-      - mongo
-      - selenium
+    command: bash -c "sh ensure_vendorization.sh"
 
   selenium:
     container_name: chrome-cuac-container
