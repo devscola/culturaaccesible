@@ -14,4 +14,7 @@ ENV SYSTEM_MODE development
 ENV HOME=/opt/app
 
 RUN mkdir -p $HOME
-WORKDIR $HOME
+ADD . $HOME
+WORKDIR $HOME/culturaaccesible-app
+
+RUN bundle install

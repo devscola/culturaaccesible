@@ -3,6 +3,9 @@ services:
   ionic:
     container_name: ionic-cuac-container
     image: devscola/culturaaccesible-ionic:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.ionic
     ports:
       - "8100:8100"
       - "35729:35729"
@@ -17,6 +20,9 @@ services:
   sinatra:
     container_name: sinatra-cuac-container
     image: devscola/culturaaccesible-sinatra:latest
+    build: 
+      context: culturaaccesible-system
+      dockerfile: Dockerfile
     ports:
       - "4567:4567"
     volumes:
