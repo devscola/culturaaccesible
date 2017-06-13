@@ -25,7 +25,7 @@ services:
     links:
       - mongo
       - selenium
-    command: bash -c "sh ensure_vendorization.sh"
+    command: bash -c "cd /opt/app/culturaaccesible-system; bundle install --path vendor; bundle exec rake"
 
   app:
     container_name: app-cuac-container
