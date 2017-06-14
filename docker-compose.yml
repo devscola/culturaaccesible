@@ -12,7 +12,7 @@ services:
     links:
       - selenium
       - mongo
-    command: bash -c "/bin/bash use_project.sh"
+    command: bash -c "sh use_project.sh"
 
   sinatra:
     container_name: sinatra-cuac-container
@@ -25,7 +25,7 @@ services:
     links:
       - mongo
       - selenium
-    command: bash -c "cd /opt/app/culturaaccesible-system; bundle install --path vendor; bundle exec rake"
+    command: bash -c "cd /opt/app/culturaaccesible-system; sh prepare_environment_tests.sh"
 
   app:
     container_name: app-cuac-container
@@ -36,9 +36,8 @@ services:
       - ./culturaaccesible-app:/opt/app/culturaaccesible-app
       - bundle:/usr/local/bundle
     links:
-      - ionic
       - selenium
-      - mongo
+      - ionic
 
   system:
     container_name: system-cuac-container
