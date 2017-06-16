@@ -22,7 +22,7 @@ install:
   - sleep 5
 
 script:
-  - docker-compose run sinatra /bin/sh -c "touch travis.ci; sh culturaaccesible-system/prepare_environment_tests.sh"
+  - docker-compose run sinatra /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; sh prepare_environment_tests.sh"
   - sleep 1
   # - docker-compose -f docker-compose.travis.yml run ionic /bin/sh -c "cd /opt/app/culturaaccesible-app; touch travis.ci; bundle install; bundle exec rspec"
   # - sleep 1
@@ -36,41 +36,3 @@ after_script:
 #      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository}@%{branch} by %{author} %{result} in %{duration}"
 #    rooms:
 #      - devscola:l7PXPT2ycwSwtbwNI8Bd1hEb#fc_travis
-
-
-
-sudo: required
-
-env:
-  DOCKER_COMPOSE_VERSION: 1.11.2
-
-services:
-  - docker
-
-before_install:
-  - rvm install ruby-2.4.0
-  - rvm use 2.4.0
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-
-install:
-  - docker-compose build
-  - sleep 1
-  - docker-compose up -d
-  - sleep 5
-
-script:
-  - docker-compose run system /bin/sh -c "touch travis.ci; sh run_tests.sh"
-  - sleep 1
-
-after_script:
-  - docker-compose down
-
-notifications:
-  slack:
-    template:
-      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository}@%{branch} by %{author} %{result} in %{duration}"
-    rooms:
-      - devscola:l7PXPT2ycwSwtbwNI8Bd1hEb#fc_travis
