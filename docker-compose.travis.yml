@@ -17,7 +17,9 @@ services:
 
   system:
     container_name: sinatra-cuac-container
-    image: devscola/culturaaccesible-sinatra:latest
+    build:
+      context: culturaaccesible-system
+      dockerfile: Dockerfile
     ports:
       - "4567:4567"
     volumes:
