@@ -24,9 +24,9 @@ install:
   - sleep 5
 
 script:
-  - docker-compose -f docker-compose.travis.yml run system /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; bundle install --jobs 3; gem install bundle; bundle exec rake test" -d
+  - docker-compose -f docker-compose.travis.yml --expose=4567 run system /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; bundle install --jobs 3; gem install bundle; bundle exec rake test" -d
   - sleep 1
-  - docker-compose -f docker-compose.travis.yml run ionicbuild /bin/sh -c "cd /opt/app/test-app; touch travis.ci; bundle install --jobs 3; gem install bundle; bundle exec rake test"
+  - docker-compose -f docker-compose.travis.yml --expose=8100 run ionicbuild /bin/sh -c "cd /opt/app/test-app; touch travis.ci; bundle install --jobs 3; gem install bundle; bundle exec rake test"
   - sleep 1
 
 after_script:
