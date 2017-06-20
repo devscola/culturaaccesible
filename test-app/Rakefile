@@ -27,6 +27,7 @@ task :test => [:bdd] do
 end
 
 task :tag, [:tag] do |t, arg|
+  sh 'cp ../culturaaccesible-app/www ./. -r'
   sh "rspec --tag #{arg.tag}"
 end
 

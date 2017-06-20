@@ -11,11 +11,11 @@ services:
      - ./test-app:/opt/app/test-app
      - bundle:/usr/local/bundle
     links:
-      - sinatra
+      - system
       - selenium
     command: bash -c "cd /opt/app/test-app; sh prepare_environment_tests.sh"
 
-  sinatra:
+  system:
     container_name: sinatra-cuac-container
     image: devscola/culturaaccesible-sinatra:latest
     ports:

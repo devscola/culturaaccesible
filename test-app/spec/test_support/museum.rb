@@ -41,6 +41,7 @@ module Page
       find('#exhibitions').click
       sleep 0.5
       first('.exhibition-item', :match => :first, wait: 5).click
+      sleep 5
       find('#enter-museum').click
     end
 

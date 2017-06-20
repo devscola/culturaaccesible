@@ -14,7 +14,7 @@ services:
       - mongo
     command: bash -c "sh use_project.sh"
 
-  sinatra:
+  system:
     container_name: sinatra-cuac-container
     image: devscola/culturaaccesible-sinatra:latest
     ports:
@@ -26,31 +26,6 @@ services:
       - mongo
       - selenium
     command: bash -c "cd /opt/app/culturaaccesible-system; sh prepare_environment_tests.sh"
-
-  app:
-    container_name: app-cuac-container
-    build:
-      context: culturaaccesible-app
-      dockerfile: Dockerfile
-    volumes:
-      - ./culturaaccesible-app:/opt/app/culturaaccesible-app
-      - bundle:/usr/local/bundle
-    links:
-      - selenium
-      - ionic
-
-  system:
-    container_name: system-cuac-container
-    build: 
-      context: culturaaccesible-system
-      dockerfile: Dockerfile.system
-    volumes:
-      - ./culturaaccesible-system:/opt/app/culturaaccesible-system
-      - bundle:/usr/local/bundle
-    links:
-      - sinatra
-      - mongo
-      - selenium
 
   selenium:
     container_name: chrome-cuac-container

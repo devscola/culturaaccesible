@@ -29,6 +29,11 @@ install_bundle_in_app () {
   bundle install --path vendor --jobs 3
   cd ..
 }
+install_bundle_in_testapp () {
+  cd test-app
+  bundle install --path vendor --jobs 3
+  cd ..
+}
 install_npm_in_app () {
   cd culturaaccesible-app
   npm install -f
@@ -52,7 +57,12 @@ else
 
   if [ ! -d "culturaaccesible-app/vendor" ]; then
       install_bundle_in_app
+      install_bundle_in_testapp
       install_npm_in_app
+  fi
+
+  if [ ! -d "test-app/vendor" ]; then
+      install_bundle_in_testapp
   fi
 fi
 
