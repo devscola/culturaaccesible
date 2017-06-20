@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 dist: trusty
 group: edge 
 
@@ -24,9 +24,9 @@ install:
   - sleep 5
 
 script:
-  - docker-compose -f docker-compose.travis.yml run system /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; bundle install --jobs 3; bundle exec rake"
+  - docker-compose -f docker-compose.travis.yml run system /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; gem install bundle; bundle install --jobs 3; bundle exec rake"
   - sleep 1
-  - docker-compose -f docker-compose.travis.yml run ionicbuild /bin/sh -c "cd /opt/app/test-app; touch travis.ci; bundle install --jobs 3; bundle exec rake"
+  - docker-compose -f docker-compose.travis.yml run ionicbuild /bin/sh -c "cd /opt/app/test-app; touch travis.ci; gem install bundle; bundle install --jobs 3; bundle exec rake"
   - sleep 1
 
 after_script:
