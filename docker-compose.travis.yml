@@ -13,7 +13,6 @@ services:
     links:
       - system
       - selenium
-      - mongo
     command: bash -c "cd /opt/app/test-app; sh prepare_environment_tests.sh"
 
   system:
@@ -27,7 +26,6 @@ services:
       - ./culturaaccesible-system:/opt/app/culturaaccesible-system
       - bundle:/usr/local/bundle
     links:
-      - ionicbuild
       - selenium
       - mongo
     command: bash -c "cd /opt/app/culturaaccesible-system; sh prepare_environment_tests.sh"
