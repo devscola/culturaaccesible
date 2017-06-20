@@ -16,16 +16,16 @@ before_install:
 
 install:
   - /bin/sh -c "/bin/bash prepare_project.sh"
-  - docker-compose -f docker-compose.yml build
+  - docker-compose -f docker-compose.travis.yml build
   - sleep 1
-  - docker-compose -f docker-compose.yml up -d
+  - docker-compose -f docker-compose.travis.yml up -d
   - sleep 5
 
 script:
-  - docker-compose run sinatra /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; sh prepare_environment_tests.sh"
+  - docker-compose -f docker-compose.travis.yml run sinatra /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; sh prepare_environment_tests.sh"
   - sleep 1
-  # - docker-compose -f docker-compose.travis.yml run ionic /bin/sh -c "cd /opt/app/culturaaccesible-app; touch travis.ci; bundle install; bundle exec rspec"
-  # - sleep 1
+  - docker-compose -f docker-compose.travis.yml run ionicbuild /bin/sh -c "cd /opt/app/test-app; touch travis.ci; sh prepare_environment_tests.sh"
+  - sleep 1
 
 after_script:
   - docker-compose down

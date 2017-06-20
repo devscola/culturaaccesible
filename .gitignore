@@ -33,6 +33,9 @@ www/
 .v8flags.*
 culturaaccesible-app
 culturaaccesible-system
+test-app/vendor
+test-app/.bundle
+test-app/Gemfile.lock
 managedocker.sh
 
 $RECYCLE.BIN/
