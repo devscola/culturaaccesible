@@ -28,7 +28,7 @@ script:
   - sleep 1
   - cd test-app
   - touch travis.ci
-  - bundle install --jobs 3
+  - bundle install --path vendor --jobs 3
   - gem install bundle
   - rake test
   - sleep 1
