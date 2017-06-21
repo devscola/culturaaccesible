@@ -28,8 +28,8 @@ script:
   - sleep 1
   - cd test-app
   - sudo touch travis.ci
-  - sudo bundle install --path vendor --jobs 3
   - sudo gem install bundle
+  - sudo bundle install --path vendor --jobs 3
   - rake test
   - sleep 1
 
