@@ -27,10 +27,9 @@ script:
   - docker-compose -f docker-compose.travis.yml run system /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; bundle install --jobs 3; gem install bundle; bundle exec rake test" -d
   - sleep 1
   - cd test-app
-  - ls -la
   - touch travis.ci
   - gem install bundle
-  - bundle --version
+  - sudo rm .bundle -r
   - bundle install --path vendor --jobs 3
   - rake test
   - sleep 1
