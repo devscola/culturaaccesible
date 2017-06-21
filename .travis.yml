@@ -11,6 +11,10 @@ services:
 before_install:
   - rvm install ruby-2.4.0
   - rvm use 2.4.0
+  - cd test-app
+  - touch travis.ci
+  - bundle install --job 3
+  - echo "--------------------------------"
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
@@ -26,7 +30,10 @@ install:
 script:
   - docker-compose -f docker-compose.travis.yml run system /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; bundle install --jobs 3; gem install bundle; bundle exec rake test" -d
   - sleep 1
-  - /bin/sh -c "cd test-app; touch travis.ci; bundle install --jobs 3; gem install bundle; bundle exec rake test"
+  - /bin/sh -c "cd test-app; touch travis.ci;"
+  - /bin/sh -c " bundle install --jobs 3; "
+  - /bin/sh -c " gem install bundle; "
+  - /bin/sh -c " bundle exec rake test"
   - sleep 1
 
 after_script:
