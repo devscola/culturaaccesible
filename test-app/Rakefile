@@ -10,10 +10,6 @@ def copy_build_in_local_system
   end
 end
 
-def up_the_navigator
-  sh 'xdg-open "http://localhost:8100"'
-end
-
 task :default => :start
 
 task :start do
@@ -28,8 +24,6 @@ task :start do
 end
 
 task :bdd do
-  up_the_navigator
-  copy_build_in_local_system
   sh 'rspec spec'
 end
 
@@ -37,8 +31,6 @@ task :test => [:bdd] do
 end
 
 task :tag, [:tag] do |t, arg|
-  up_the_navigator
-  copy_build_in_local_system
   sh "rspec --tag #{arg.tag}"
 end
 

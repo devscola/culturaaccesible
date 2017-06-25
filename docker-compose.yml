@@ -1,30 +1,33 @@
 version: '2'
 services:
-  ionic:
-    container_name: ionic-cuac-container
-    image: devscola/culturaaccesible-ionic:latest
+  ionicbuild:
+    container_name: ionicbuild-cuac-container
+    build:
+      context: test-app
+      dockerfile: Dockerfile
     ports:
       - "8100:8100"
-      - "35729:35729"
     volumes:
-      - .:/opt/app
-      - bundle:/usr/local/bundle
+     - ./test-app:/opt/app/test-app
+     - bundle:/usr/local/bundle
     links:
+      - system
       - selenium
-      - mongo
-    command: bash -c "sh use_project.sh"
+    command: bash -c "cd /opt/app/test-app; sh prepare_environment_tests.sh"
 
   system:
     container_name: sinatra-cuac-container
-    image: devscola/culturaaccesible-sinatra:latest
+    build:
+      context: culturaaccesible-system
+      dockerfile: Dockerfile
     ports:
       - "4567:4567"
     volumes:
       - ./culturaaccesible-system:/opt/app/culturaaccesible-system
       - bundle:/usr/local/bundle
     links:
-      - mongo
       - selenium
+      - mongo
     command: bash -c "cd /opt/app/culturaaccesible-system; sh prepare_environment_tests.sh"
 
   selenium:
