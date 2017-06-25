@@ -18,19 +18,16 @@ before_install:
 
 install:
   - /bin/sh -c "/bin/bash prepare_project.sh"
-  - docker-compose -f docker-compose.travis.yml build
+  - docker-compose -f docker-compose.yml build
   - sleep 1
-  - docker-compose -f docker-compose.travis.yml up -d
+  - docker-compose -f docker-compose.yml up -d
   - sleep 5
 
 script:
-  - docker-compose -f docker-compose.travis.yml run system /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; bundle install --jobs 3; gem install bundle; bundle exec rake test" -d
+  - docker-compose -f docker-compose.yml run system /bin/sh -c "cd /opt/app/culturaaccesible-system; touch travis.ci; bundle install --jobs 3; gem install bundle; bundle exec rake test" -d
   - sleep 1
   - cd test-app
   - touch travis.ci
-  - gem install bundle
-  - sudo rm .bundle -r
-  - bundle install --path vendor --jobs 3
   - rake test
   - sleep 1
 
