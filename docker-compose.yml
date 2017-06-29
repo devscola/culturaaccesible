@@ -1,19 +1,19 @@
 version: '2'
 services:
-  ionicbuild:
-    container_name: ionicbuild-cuac-container
-    build:
-      context: test-app
-      dockerfile: Dockerfile
+  ionic:
+    container_name: ionic-cuac-container
+    image: devscola/culturaaccesible-ionic:latest
     ports:
       - "8100:8100"
+      - "35729:35729"
     volumes:
-     - ./test-app:/opt/app/test-app
-     - bundle:/usr/local/bundle
+      - .:/opt/app
+      - bundle:/usr/local/bundle
     links:
       - system
       - selenium
-    command: bash -c "cd /opt/app/test-app; sh prepare_environment_tests.sh"
+      - mongo
+    command: bash -c "sh use_project.sh"
 
   system:
     container_name: sinatra-cuac-container

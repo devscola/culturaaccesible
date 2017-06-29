@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/devscola/culturaaccesible/issues"
   },
-  "homepage": "https://github.com/devscola/culturaaccesible#readme"
+  "homepage": "https://github.com/devscola/culturaaccesible#readme",
+  "dependencies": {
+    "ionic": "^3.4.0"
+  }
 }
