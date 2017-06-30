@@ -37,6 +37,7 @@ test-app/vendor
 test-app/.bundle
 test-app/Gemfile.lock
 managedocker.sh
+package-lock.json
 
 $RECYCLE.BIN/
 
