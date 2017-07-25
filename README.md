@@ -24,6 +24,7 @@ docker-compose run system bundle exec rake test
 
 e. For run test of app ionic:
 
-docker-compose run system bundle exec rspec
+docker-compose run ionic sh -c "cd culturaaccesible-app; bundle exec rspec"
+
 
 
