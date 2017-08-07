@@ -1,7 +1,0 @@
-development:
-  clients:
-    default:
-      database: culturaaccesible_db
-      hosts:
-        - localhost:27017
-        
